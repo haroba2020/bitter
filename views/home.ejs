@@ -1,0 +1,15 @@
+<%- include('partials/header'); -%>
+
+<div class="card-wrapper">
+    <% items.forEach(item => { %>
+        <div class="card">
+            <h1><%= item.thing %></h1>
+            <p><%= item.bing %></p>
+            <p><%= item.chilling %></p>
+            <p>by <%= item.owner %></p>
+
+        </div>
+    <% }); %>
+</div>        
+
+<%- include('partials/footer'); -%>

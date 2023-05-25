@@ -1,0 +1,211 @@
+body{
+    font-size: 1.2rem;
+    margin: 0;
+    background-color: #555555;
+    letter-spacing: 1px;
+    box-sizing:border-box;
+}
+
+h1, h2, h3, h4, ul, li, a, p, input, label, button, div, footer{
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #effbff;
+}
+
+a{
+    text-decoration: none;
+}
+
+header{
+    display: flex;
+    align-items: center;  
+}
+header h1{
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+.new-blog{
+    font-size: 2em;
+    margin-top: 20px;
+  }
+.new-blog a:hover{
+  color: gray;
+}
+header h2{
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    color: #999;
+}
+header .btn{
+    margin-top: 20px;
+    padding: 12px 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 0.8em;
+}
+form h2{
+    font-size: 2.4em;
+    font-weight: 900;
+    margin-bottom: 40px;
+}
+form{
+    width: 380px;
+    margin: 0 auto;
+    padding: 30px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    background-color: #04aa6d;
+}
+input{
+  padding: 10px 2px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  color: #555555;
+  font-size: 1em;
+  width: 100%;
+}
+button{
+  margin-top: 30px;
+  border-radius: 36px;
+  background-color: #555555;
+  border:0;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8em;
+  display: block;
+  padding: 10px 16px;
+  letter-spacing: 2px;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 120px;
+    padding: 20px;
+    background-color: #04aa6d;
+  
+}
+nav ul{
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+nav li{
+  margin-left: 20px;
+}
+nav li a{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8em;
+  display: block;
+  padding: 10px 16px;
+  letter-spacing: 2px;
+}
+
+/* shaun netninja */
+
+.content{
+  margin-left: 20px;
+}
+.blogs a{
+  display: block;
+  margin: 40px 0;
+  padding-left: 30px;
+}
+.blogs a:hover h3{
+  color: crimson;
+}
+.blogs button{
+  text-align: center;
+  justify-content: center;
+  display: inline;
+  margin-top: 0px;
+}
+.user a{
+  display: block;
+  margin: 10px 0;
+  padding-left: 30px;
+}
+
+/* details styles */
+.details{
+  position: relative;
+}
+.delete{
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  padding: 8px;
+}
+.delete:hover{
+  cursor: pointer;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+}
+
+.create-blog form{
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.create-blog input,
+
+.create-blog textarea{
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+.create-blog label{
+  display: block;
+  margin-top: 24px;
+}
+textarea{
+  height: 120px;
+}
+.create-blog button{
+  margin-top: 20px;
+  background: crimson;
+  color: 555555;
+  padding: 6px;
+  border: 0;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.shoecontainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem;
+}
+.shoebox1{
+  flex: 1;
+  margin-bottom: 20px;
+}
+.shoebox2{
+  flex: 1;
+  margin-bottom: 20px;
+}
+.title, .snippet {
+  margin: 0;
+}
+.card-wrapper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Add the desired spacing value */
+}
+.card{
+    width: 500px;
+    display: inline-block;
+    border: 5px solid black;
+    border-radius: 5px;
+    background-color: #333333;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}

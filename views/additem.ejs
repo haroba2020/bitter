@@ -1,0 +1,52 @@
+<%- include('partials/header'); -%>
+
+<% if(user){ %>
+        <form>
+            <h2>Add a item</h2>
+            <label for="thing">thing</label>
+            <input type="text" name="thing" required>
+            <label for="bing">bing</label>
+            <input type="text" name="bing" required>
+            <label for="chilling">chilling</label>
+            <input type="text" name="chilling" required>
+            <button>Submit</button>
+        </form>
+    <% }else{ %>
+        <h1>Her har du ikke tilgang!!!</h1>
+        <img src="/stop.png" alt="Stop mf">
+    <% } %>   
+
+
+<!-- post request som tar verdiene til formen og sender det som en post request for å kunne authentisere bruker -->
+<script>
+if(document.querySelector('form')){
+    const form = document.querySelector('form')
+    form.addEventListener('submit', async (e)=>{
+        e.preventDefault()
+
+        const thing = form.thing.value
+        const bing = form.bing.value
+        const chilling = form.chilling.value
+
+
+        //sender data for authentisering
+        try {
+            const res = await fetch('/additem',{
+                method: 'post',
+                body: JSON.stringify({thing,bing,chilling}),
+                headers: {'Content-Type': 'application/json'}
+            })
+
+            //venter på data
+            const data = await res.json()
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    })
+}
+
+</script>
+
+
+<%- include('partials/footer'); -%>
