@@ -10,12 +10,14 @@
 <body>
     <nav>
         <h1><a href="/">STOCK HOME</a></h1>
+        <h1>Bitter <% if(user){%>
+            <a href="/home">- <%= user.name %></a>
+        <%}%></h1>
         <ul>
             <% if(user){ %>
-                <li> Welcome <%= user.name %> </li>
-                <li> <a href="/additem"> Additem</a></li>
                 <li> <a href="/logout"> Logout</a></li>
-                <% }else{%> 
+                <% }else{%>
+                    
                 <li> <a href="/login"> Log in</a></li>
                 <li> <a href="/signup"> Signup</a></li>
                 <% } %> 

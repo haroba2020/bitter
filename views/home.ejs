@@ -1,15 +1,62 @@
 <%- include('partials/header'); -%>
 
 <div class="card-wrapper">
+    <% if(user){ %>
+        <form>
+            <label for="title">Title</label><br>
+            <input type="text" name="title" class="title" required> <br>
+            <label for="content">Content</label><br>
+            <textarea name="Text1" cols="40" rows="5"></textarea>
+            <button>Publish</button>
+            <p class="error"></p>
+        </form>
+    <% } %>
     <% items.forEach(item => { %>
         <div class="card">
-            <h1><%= item.thing %></h1>
-            <p><%= item.bing %></p>
-            <p><%= item.chilling %></p>
-            <p>by <%= item.owner %></p>
-
+            <a href= "<%= item._id %>"> <h1><%= item.title %></h1> </a>
+            <h2><%= item.content %></h2>            
         </div>
     <% }); %>
 </div>        
+<script>
+    if(document.querySelector('form')){
+        const form = document.querySelector('form')
+        const textarea = document.querySelector('textarea')
+        const errorField = document.querySelector('.error')
+        form.addEventListener('submit', async (e)=>{
+            e.preventDefault()
 
+            const title = form.title.value
+            const content = textarea.value
+
+            console.log(content.length)
+            if(content.length>100){
+                console.log('kys, '+content.length+" Are way too many numbers")
+                errorField.textContent = 'kys, '+content.length+" Are way too many numbers"
+            }else{
+                 //sender data for authentisering
+                try {
+                    
+                    const res = await fetch('/additem',{
+                        method: 'post',
+                        body: JSON.stringify({title,content,}),
+                        headers: {'Content-Type': 'application/json'}
+                    })
+        
+                    //venter på data
+                    const data = await res.json()
+                    console.log(data)
+                    if(data){
+                        location.assign('/home')
+                    }
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+           
+        })
+    }
+    
+    </script>
+    
 <%- include('partials/footer'); -%>

@@ -14,6 +14,14 @@ const verifyToken = (token) => {
       });
     });
   };
+const getUserById = async (token) =>{
+    const id = await verifyToken(token)
+    return new Promise((resolve, reject) => {
+        User.findById(id).then((result)=>{
+            resolve(result)
+        })
+    });
+}
   //en jwt cookie som tar in user id som lagres for senere bruk
 const createToken = (id) => {
     return jwt.sign({ id }, 'hrobos secret', {
@@ -31,15 +39,41 @@ module.exports.login_get = (req,res)=>{
 module.exports.additem_get = (req,res)=>{
     res.render('additem');
 }
+module.exports.user = async (req,res)=>{
+    const id = req.params.id;
 
+    // Exclude favicon request
+    if (id === 'favicon.ico') {
+      return res.status(404).end();
+    }
+  
+    console.log(id);
+  
+    User.find({name:id}).then((users)=>{
+        const user = users[0]
+        Item.find({owner:user.email}).then((items)=>{
+            res.render('user', {items, owner:user});
+        })
+    }).catch((err)=>{
+        res.render('404')
+    })
+}
+
+module.exports.home = async (req, res)=>{
+    const token = req.cookies.jwt
+    const user = await getUserById(token)
+
+    Item.find({owner:user.email}).then((items)=>{
+        res.render('home', {items})
+    })
+}
 
 module.exports.addItem = async (req,res)=>{
-    const {thing,bing,chilling} = req.body
+    const {title, content} = req.body
     const token = req.cookies.jwt
 
-    const id = await verifyToken(token)
-    const user = await User.findById(id)
-    const item = await Item.create({thing,bing,chilling, owner:user.email})
+    const user = await getUserById(token)
+    const item = await Item.create({title,content, owner:user.email})
     console.log(item)
 
     res.status(201).json({item})

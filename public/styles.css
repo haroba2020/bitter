@@ -46,20 +46,21 @@ header .btn{
     display: inline-block;
     font-size: 0.8em;
 }
-form h2{
-    font-size: 2.4em;
-    font-weight: 900;
-    margin-bottom: 40px;
-}
 form{
-    width: 380px;
+    width: 1000px;
     margin: 0 auto;
     padding: 30px;
     box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
     border-radius: 10px;
     background-color: #04aa6d;
 }
-input{
+input.title{
+  width: 200px;
+}
+input.content{
+  margin-left: 0px;
+}
+input, textarea{
   padding: 10px 2px;
   border-radius: 4px;
   border: 1px solid #ddd;
@@ -83,7 +84,7 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 120px;
+    margin-bottom: 20px;
     padding: 20px;
     background-color: #04aa6d;
   
@@ -195,17 +196,24 @@ textarea{
   margin: 0;
 }
 .card-wrapper{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px; /* Add the desired spacing value */
+  display: grid;
+  place-items: center;
 }
 .card{
-    width: 500px;
-    display: inline-block;
+    width: 1000px;
     border: 5px solid black;
     border-radius: 5px;
     background-color: #333333;
     padding: 5px;
+    margin: 20px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    overflow-wrap: break-word;
+
+ }
+
+
+.error{
+  color: rgb(211, 56, 56);
+  text-align: center;
+  font-size: 25px;
 }

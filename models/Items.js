@@ -2,15 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 //enkel schema for å lage blogs
 const itemSchema = new Schema({
-    thing: {
+    title: {
         type:String,
         required:true
     },
-    bing: {
-        type:String,
-        required:true
-    },
-    chilling:{
+    content: {
         type:String,
         required:true
     },

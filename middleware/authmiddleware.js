@@ -19,5 +19,25 @@ const checkUser = (req,res,next)=>{
         next()
     }
 }
+const requireAuth = (req,res,next) => {
 
-module.exports = {checkUser}
+  const token = req.cookies.jwt
+
+  //check jwt
+  if(token){
+      jwt.verify(token,'hrobos secret',(err,decodedToken)=>{
+          if(err){
+              console.log(err.message)
+              res.redirect('/login')
+          }else{
+              console.log(decodedToken)
+              next()
+          }
+      })
+  }
+  else{
+      res.redirect('/login')
+  }
+}
+
+module.exports = {checkUser, requireAuth}

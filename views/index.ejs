@@ -1,0 +1,15 @@
+<%- include('partials/header'); -%>
+
+<div class="card-wrapper">
+    <% let count = 0; %>
+    <% items.forEach(item => { %>
+        <% count++ %>
+        <% if(count<=5){ %>
+            <div class="card">
+                <a href= "<%= item._id %>"> <h1><%= item.title %></h1> </a>
+                <h2><%= item.content %></h2>
+            </div>
+            <% } %>
+    <% }); %>
+</div>        
+<%- include('partials/footer'); -%>
