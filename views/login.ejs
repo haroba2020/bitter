@@ -5,20 +5,16 @@
     <h2>Log in</h2>
     <label for="email">Email</label>
     <input type="email" name="email" required>
-    <div class="email error" ></div>
     <label for="password">password</label>
     <input type="password" name="password" required>
-    <div class="password error" ></div>
     <button>Login</button>
-    <p class="error"> Glorg not accepted</p>
+    <p class="error"> </p>
 </form>
 
 <!-- post request som tar verdiene til formen og sender det som en post request for å kunne authentisere bruker -->
 <script>
     const form = document.querySelector('form')
-    const emailError = document.querySelector('.email.error')
-    const passwordError = document.querySelector('.password.error')
-
+    const errorField = document.querySelector('.error')
 
     form.addEventListener('submit', async (e)=>{
         e.preventDefault()
@@ -39,9 +35,8 @@
             console.log(data)
 
             //error handler
-            if(data.errors){
-                emailError.textContent = data.errors.email
-                passwordError.textContent = data.errors.password
+            if(data.err){
+                errorField.textContent = "password and email doesn't match"
             }
             //hvis finner user så redirect
             if(data.user) {

@@ -81,11 +81,17 @@ module.exports.addItem = async (req,res)=>{
 
 module.exports.addUser = async (req,res)=>{
     const {name, password, email} = req.body
-    const user = await User.create({name, password, email,})
-    const token = createToken(user._id)
-    res.cookie('jwt',token, {maxAge: maxAge * 1000})
-    res.status(201).json({user})
+
+    try {
+        const user = await User.create({name, password, email,})
+        const token = createToken(user._id)
+        res.cookie('jwt',token, {maxAge: maxAge * 1000})
+        res.status(201).json({user})  
+    } catch (err) {
+        res.status(400).json({ err })
+    }
 }
+
 const maxAge = 3* 24 * 60 * 60 
 
 module.exports.login_post = async (req,res)=>{
