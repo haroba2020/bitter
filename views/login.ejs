@@ -3,8 +3,8 @@
 
 <form>
     <h2>Log in</h2>
-    <label for="email">Email</label>
-    <input type="email" name="email" required>
+    <label for="name">Username</label>
+    <input type="text" name="name" required>
     <label for="password">password</label>
     <input type="password" name="password" required>
     <button>Login</button>
@@ -19,14 +19,14 @@
     form.addEventListener('submit', async (e)=>{
         e.preventDefault()
 
-        const email = form.email.value
+        const name = form.name.value
         const password = form.password.value
 
         //sender data for authentisering
         try {
             const res = await fetch('/login',{
                 method: 'post',
-                body: JSON.stringify({email,password}),
+                body: JSON.stringify({name,password}),
                 headers: {'Content-Type': 'application/json'}
             })
 

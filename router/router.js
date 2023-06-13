@@ -13,8 +13,10 @@ router.get('/home', requireAuth, controller.home);
 router.post('/adduser', controller.addUser)
 router.post('/additem', controller.addItem)
 router.post('/login', controller.login_post)
-
+router.post('/comment', controller.comment)
+router.get('/posts/:id', controller.browse)
 router.get('/:id', controller.user);
+router.delete('/:id',controller.item_delete)
 
 
 module.exports = router

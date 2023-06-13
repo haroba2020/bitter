@@ -1,0 +1,62 @@
+<%- include('partials/header'); -%>
+<div class="card-wrapper">
+    <div class="card-big">
+        <p>by <%= item.owner %></p>
+        <h1><%= item.title %></h1> </a>
+        <h2><%= item.content %></h2>
+    </div>
+    <% if(user){ %>
+        <form>
+            <label for="content">Comment!</label><br>
+            <textarea name="Text1" cols="40" rows="5"></textarea>
+            <button data-doc="<%= item._id %>">Comment</button>
+            <p class="error"></p>
+        </form>
+    <% } %>
+    <% comments.forEach(comment => { %>
+        <div class="card">
+            <p>By <%= comment.owner %></p>
+            <h2><%= comment.content %></h2>
+        </div>
+    <% }); %>
+</div>
+
+<script>
+    const form = document.querySelector('form')
+    const textarea = document.querySelector('textarea')
+    const button = document.querySelector('button')
+    const errorField = document.querySelector('.error')
+
+    console.log(button)
+    const id = button.dataset.doc
+
+    form.addEventListener('submit', async (e)=>{
+        e.preventDefault()
+        const content = textarea.value
+        console.log(id)
+        console.log(content.length)
+        if(content.length>100){
+            console.log('kys, '+content.length+" Are way too many numbers")
+            errorField.textContent = 'kys, '+content.length+" Are way too many numbers"
+        }else{
+            //sender data for authentisering
+            console.log('gaming')
+            try {
+                const res = await fetch('/comment',{
+                    method: 'post',
+                    body: JSON.stringify({content,id}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                //venter på data
+                const data = await res.json()
+                console.log(data)
+                if(data){
+                    // location.assign('/home')
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    })
+</script>
+<%- include('partials/footer'); -%>

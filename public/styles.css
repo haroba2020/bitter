@@ -177,21 +177,6 @@ textarea{
   cursor: pointer;
 }
 
-.shoecontainer{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  text-align: center;
-  gap: 1rem;
-}
-.shoebox1{
-  flex: 1;
-  margin-bottom: 20px;
-}
-.shoebox2{
-  flex: 1;
-  margin-bottom: 20px;
-}
 .title, .snippet {
   margin: 0;
 }
@@ -208,7 +193,17 @@ textarea{
     margin: 20px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     overflow-wrap: break-word;
-
+ }
+.card-big{
+    width: 1200px;
+    min-height: 300px;
+    border: 5px solid black;
+    border-radius: 5px;
+    background-color: #333333;
+    padding: 5px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    overflow-wrap: break-word;
  }
 
 

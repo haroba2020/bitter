@@ -13,49 +13,64 @@
     <% } %>
     <% items.forEach(item => { %>
         <div class="card">
+            <p>by <%= item.owner %></p>
             <a href= "<%= item._id %>"> <h1><%= item.title %></h1> </a>
-            <h2><%= item.content %></h2>            
+            <h2><%= item.content %></h2>
+            <button data-doc="<%= item._id %>" >Kill bitt</button>
         </div>
     <% }); %>
 </div>        
 <script>
-    if(document.querySelector('form')){
-        const form = document.querySelector('form')
-        const textarea = document.querySelector('textarea')
-        const errorField = document.querySelector('.error')
-        form.addEventListener('submit', async (e)=>{
-            e.preventDefault()
+    const form = document.querySelector('form')
+    const cardWrapper = document.querySelector('.card-wrapper')
+    const textarea = document.querySelector('textarea')
+    const errorField = document.querySelector('.error')
+    form.addEventListener('submit', async (e)=>{
+        e.preventDefault()
 
-            const title = form.title.value
-            const content = textarea.value
+        const title = form.title.value
+        const content = textarea.value
 
-            console.log(content.length)
-            if(content.length>100){
-                console.log('kys, '+content.length+" Are way too many numbers")
-                errorField.textContent = 'kys, '+content.length+" Are way too many numbers"
-            }else{
-                 //sender data for authentisering
-                try {
-                    
-                    const res = await fetch('/additem',{
-                        method: 'post',
-                        body: JSON.stringify({title,content,}),
-                        headers: {'Content-Type': 'application/json'}
-                    })
-        
-                    //venter på data
-                    const data = await res.json()
-                    console.log(data)
-                    if(data){
-                        location.assign('/home')
-                    }
-                } catch (err) {
-                    console.log(err)
+        console.log(content.length)
+        if(content.length>100){
+            console.log('kys, '+content.length+" Are way too many numbers")
+            errorField.textContent = 'kys, '+content.length+" Are way too many numbers"
+        }else{
+                //sender data for authentisering
+            try {
+                
+                const res = await fetch('/additem',{
+                    method: 'post',
+                    body: JSON.stringify({title,content,}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+    
+                //venter på data
+                const data = await res.json()
+                console.log(data)
+                if(data){
+                    location.assign('/home')
                 }
+            } catch (err) {
+                console.log(err)
             }
-           
-        })
-    }
+        }
+    })
+    
+    cardWrapper.addEventListener('click', e=>{
+        console.log(e.target)
+        if(e.target.textContent === 'Kill bitt'){
+            const id = e.target.dataset.doc
+            console.log(id)
+            const endpoint = `/${id}`;
+            fetch(endpoint, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => location.assign('/home'))
+            .catch(err => console.log(err));
+            }
+    })
     
     </script>
     

@@ -6,10 +6,12 @@
         <% count++ %>
         <% if(count<=5){ %>
             <div class="card">
-                <a href= "<%= item._id %>"> <h1><%= item.title %></h1> </a>
+                <p>by <%= item.owner %></p>
+                <a href="/posts/<%= item._id %>"> <h1><%= item.title %></h1> </a>
                 <h2><%= item.content %></h2>
+                <button>Comment</button>
             </div>
-            <% } %>
+        <% } %>
     <% }); %>
 </div>        
 <%- include('partials/footer'); -%>
