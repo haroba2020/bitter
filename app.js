@@ -24,7 +24,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.get('*', checkUser)
 
 app.get('/',(req,res)=>{
-    Item.find().then((items)=>{
+    Item.find().sort({createdAt:-1}).then((items)=>{
             res.render('index', {items})
     })
 })

@@ -63,7 +63,7 @@ module.exports.home = async (req, res)=>{
     const token = req.cookies.jwt
     const user = await getUserById(token)
 
-    Item.find({owner:user.email}).then((items)=>{
+    Item.find({owner:user.email}).sort({createdAt:-1}).then((items)=>{
         res.render('home', {items})
     })
 }
