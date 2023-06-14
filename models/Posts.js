@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 //enkel schema for å lage blogs
-const itemSchema = new Schema({
+const postSchema = new Schema({
     title: {
         type:String,
         required:true
@@ -16,5 +16,5 @@ const itemSchema = new Schema({
     },  
 }, {timestamps: true });
 
-const Item = mongoose.model('item', itemSchema);
-module.exports = Item
+const Post = mongoose.model('post', postSchema);
+module.exports = Post

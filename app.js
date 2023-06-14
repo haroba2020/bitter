@@ -5,7 +5,7 @@ const routes = require('./router/router')
 const {checkUser,} = require('./middleware/authmiddleware');
 const app = express();
 
-const Item = require("./models/Items");
+const Post = require("./models/Posts");
 
 //middleware
 app.use(express.static('public'))
@@ -24,8 +24,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.get('*', checkUser)
 
 app.get('/',(req,res)=>{
-    Item.find().sort({createdAt:-1}).then((items)=>{
-            res.render('index', {items})
+    Post.find().sort({createdAt:-1}).then((posts)=>{
+            res.render('index', {posts})
     })
 })
 

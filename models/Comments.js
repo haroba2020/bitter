@@ -6,7 +6,7 @@ const commentSchema = new Schema({
         type:String,
         required:true
     },
-    item:{
+    post:{
         type:String,
         required:true
     },

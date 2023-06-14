@@ -2,13 +2,13 @@
 
 <div class="card-wrapper">
     <% let count = 0; %>
-    <% items.forEach(item => { %>
+    <% posts.forEach(post => { %>
         <% count++ %>
         <% if(count<=5){ %>
             <div class="card">
-                <p>by <%= item.owner %></p>
-                <a href="/posts/<%= item._id %>"> <h1><%= item.title %></h1> </a>
-                <h2><%= item.content %></h2>
+                <p>by <%= post.owner %></p>
+                <a href="/posts/<%= post._id %>"> <h1><%= post.title %></h1> </a>
+                <h2><%= post.content %></h2>
             </div>
         <% } %>
     <% }); %>

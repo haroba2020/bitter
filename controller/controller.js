@@ -1,4 +1,4 @@
-const Item = require("../models/Items");
+const Post = require("../models/Posts");
 const User = require("../models/Users");
 const Comment = require("../models/Comments");
 const jwt = require('jsonwebtoken')
@@ -55,8 +55,8 @@ module.exports.signup_get = (req,res)=>{
 module.exports.login_get = (req,res)=>{
     res.render('login');
 }
-module.exports.additem_get = (req,res)=>{
-    res.render('additem');
+module.exports.addpost_get = (req,res)=>{
+    res.render('addpost');
 }
 module.exports.user = async (req,res)=>{
     const id = req.params.id;
@@ -70,8 +70,8 @@ module.exports.user = async (req,res)=>{
   
     User.find({name:id}).then((users)=>{
         const user = users[0]
-        Item.find({owner:user.name}).then((items)=>{
-            res.render('user', {items, owner:user});
+        Post.find({owner:user.name}).then((posts)=>{
+            res.render('user', {posts, owner:user});
         })
     }).catch((err)=>{
         res.render('404')
@@ -82,29 +82,29 @@ module.exports.home = async (req, res)=>{
     const token = req.cookies.jwt
     const user = await getUserById(token)
 
-    Item.find({owner:user.name}).sort({createdAt:-1}).then((items)=>{
-        res.render('home', {items})
+    Post.find({owner:user.name}).sort({createdAt:-1}).then((posts)=>{
+        res.render('home', {posts})
     })
 }
 
-module.exports.addItem = async (req,res)=>{
+module.exports.addPost = async (req,res)=>{
     const {title, content} = req.body
     const token = req.cookies.jwt
 
     const user = await getUserById(token)
-    const item = await Item.create({title,content, owner:user.name})
-    console.log(item)
+    const post = await Post.create({title,content, owner:user.name})
+    console.log(post)
 
-    res.status(201).json({item})
+    res.status(201).json({post})
 }
 module.exports.comment = async (req,res)=>{
     const {content,id} = req.body
     const token = req.cookies.jwt
 
     const user = await getUserById(token)
-    const item = await Item.findById(id)
-    console.log(item)
-    const comment = await Comment.create({content, item:item._id, owner:user.name})
+    const post = await Post.findById(id)
+    console.log(post)
+    const comment = await Comment.create({content, post:post._id, owner:user.name})
     console.log(comment)
 
     res.status(201).json({comment})
@@ -149,10 +149,10 @@ module.exports.logout = async (req,res) =>{
     res.redirect('/')
 }
 
-module.exports.item_delete = (req, res) =>{
+module.exports.post_delete = (req, res) =>{
     const id = req.params.id
 
-    Item.findByIdAndDelete(id)
+    Post.findByIdAndDelete(id)
     .then(result=>{
         res.json({ redirect: '/' });
     })
@@ -162,11 +162,11 @@ module.exports.item_delete = (req, res) =>{
 }
 module.exports.browse = (req,res)=>{
     const id = req.params.id
-    Item.findById(id).then((result)=>{
-        const item = result
-        Comment.find({item:item._id}).sort({createdAt:-1}).then((comments)=>{
+    Post.findById(id).then((result)=>{
+        const post = result
+        Comment.find({post:post._id}).sort({createdAt:-1}).then((comments)=>{
             console.log(comments)
-            res.render('browse', {item,comments})
+            res.render('browse', {post,comments})
         })
     })
 

@@ -6,17 +6,17 @@
             <label for="title">Title</label><br>
             <input type="text" name="title" class="title" required> <br>
             <label for="content">Content</label><br>
-            <textarea name="Text1" cols="40" rows="5"></textarea>
+            <textarea name="Text1" cols="30" rows="3"></textarea>
             <button>Publish</button>
             <p class="error"></p>
         </form>
     <% } %>
-    <% items.forEach(item => { %>
+    <% posts.forEach(post => { %>
         <div class="card">
-            <p>by <%= item.owner %></p>
-            <a href= "<%= item._id %>"> <h1><%= item.title %></h1> </a>
-            <h2><%= item.content %></h2>
-            <button data-doc="<%= item._id %>" >Kill bitt</button>
+            <p>by <%= post.owner %></p>
+            <a href= "<%= post._id %>"> <h1><%= post.title %></h1> </a>
+            <h2><%= post.content %></h2>
+            <button data-doc="<%= post._id %>" >Kill bitt</button>
         </div>
     <% }); %>
 </div>        
@@ -34,12 +34,12 @@
         console.log(content.length)
         if(content.length>100){
             console.log('kys, '+content.length+" Are way too many numbers")
-            errorField.textContent = 'kys, '+content.length+" Are way too many numbers"
+            errorField.textContent = `${content.length} are too many letters, go for 100 or less`
         }else{
                 //sender data for authentisering
             try {
                 
-                const res = await fetch('/additem',{
+                const res = await fetch('/addpost',{
                     method: 'post',
                     body: JSON.stringify({title,content,}),
                     headers: {'Content-Type': 'application/json'}
